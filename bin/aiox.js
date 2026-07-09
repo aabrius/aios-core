@@ -74,6 +74,9 @@ USAGE:
   npx aiox-core@latest validate     # Validate installation integrity
   npx aiox-core@latest info         # Show system info
   npx aiox-core@latest doctor       # Run diagnostics
+  aiox sdc plan <story.md>          # Lean full-sdc plan/progress
+  aiox sdc next <story-id>          # Next SDC phase + skill
+  aiox wave plan --stories a,b      # Lean wave-execute DAG plan
   aiox-delegate codex -t <slug>     # Delegate implementation to external executor
   npx aiox-core@latest enterprise upgrade --target . --dry-run --enterprise-source <path>
                                        # Plan Pro to Enterprise upgrade
@@ -919,6 +922,28 @@ async function main() {
       }
       break;
 
+    case 'sdc':
+      // Lean full-sdc runtime — plan / verify / progress
+      try {
+        const { run } = require('../.aiox-core/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        console.error(`❌ SDC command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+
+    case 'wave':
+      // Lean wave-execute planner — DAG + file partition
+      try {
+        const { run } = require('../.aiox-core/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        console.error(`❌ Wave command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+
     case 'enterprise':
       // AIOX Enterprise Upgrade Planning - Story PEM.1
       await runEnterprise();
@@ -946,6 +971,15 @@ async function main() {
       };
       if (!installOptions.quiet) {
         console.log('AIOX-FullStack Installation\n');
+        // CORE-SU.F1 / #773 — Windows npx lock timeout advisory
+        try {
+          const {
+            printWindowsNpxInstallHint,
+          } = require('../.aiox-core/core/install/windows-npx-hint');
+          printWindowsNpxInstallHint();
+        } catch (_err) {
+          /* optional hint */
+        }
       }
       await runWizard(installOptions);
       break;

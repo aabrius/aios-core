@@ -18,7 +18,7 @@ These rules apply in every Grok session in this repo. Full constitution: `.aiox-
 
 `Draft → Ready → InProgress → InReview → Done`
 
-SDC skill: `/aiox-sdc`
+SDC: `/aiox-full-sdc` (lean) or `/aiox-sdc` (index). Atomics: `/aiox-validate-story-draft`, `/aiox-develop-story`, `/aiox-review-story`, `/aiox-apply-qa-fixes`, `/aiox-close-story`.
 
 ## Quality gates
 
@@ -29,7 +29,7 @@ npm run lint && npm run typecheck && npm test
 ## Layers (do not corrupt)
 
 - **L1/L2** framework core & templates under `.aiox-core/` — extend carefully; frameworkProtection may deny edits
-- **L4** project work: `docs/stories/`, `packages/`, `squads/`, `tests/`
+- **L4** work: `docs/stories/` (project) and/or `docs/framework/epics/` (framework OSS), `packages/`, `squads/`, `tests/`
 
 ## Grok entry points
 

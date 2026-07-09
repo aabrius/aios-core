@@ -1,9 +1,11 @@
 ---
-name: aiox-commit
-description: >
-  Create a local conventional commit for AIOX work. Never pushes. Use when committing, /aiox-commit, or local git commit.
 metadata:
   short-description: "AIOX workflow: aiox-commit"
+name: aiox-commit
+description: >
+  Create a local conventional commit for AIOX work. Never pushes.
+  Use when: committing, /aiox-commit, or local git commit.
+user-invocable: true
 ---
 
 # AIOX Local Commit
@@ -28,4 +30,3 @@ chore: ...
 
 - `git push`, `--force`, `git commit --no-verify` to bypass gates
 - Amending published commits without explicit user request
-
